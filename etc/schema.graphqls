@@ -1,0 +1,32 @@
+type Employee implements EmployeeInterface  {
+	name : String
+	email : String!
+	mobile: String
+	salary : String
+	date_of_joining : String
+	hobbies : [String],
+	is_contract_basis : Boolean
+	weight: Float
+}
+
+type JobDetails {
+	department: String
+	total_employee: Int
+}
+
+type Query {
+	employees: [Employee] @resolver(class: "\\Chandan\\MyGraphQL\\Model\\Resolver\\Employees") @doc(description: "Employee list.")
+	jobdetails: [JobDetails] @resolver(class: "\\Chandan\\MyGraphQL\\Model\\Resolver\\JobDetails") @doc(description: "Job details.")
+	getEmployee(email: String!): Employee @resolver(class: "\\Chandan\\MyGraphQL\\Model\\Resolver\\GetEmployee") @doc(description: "Employee list.")
+}
+
+interface EmployeeInterface @typeResolver(class: "\\Chandan\\MyGraphQL\\Model\\Resolver\\EmployeeTypeResolver"){
+	name : String
+	email : String!
+	mobile: String
+	salary : String
+	date_of_joining : String
+	hobbies : [String],
+	is_contract_basis : Boolean
+	weight: Float
+}
